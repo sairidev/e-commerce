@@ -1,0 +1,19 @@
+#counter {
+  display: flex;
+  border: 1px solid rgb(202, 202, 202);
+
+  span:first-child {
+    border-left: none;
+  }
+
+  span:nth-child(even) {
+    cursor: initial;
+  }
+
+  span {
+    border-left: 1px solid rgb(202, 202, 202);
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+}
