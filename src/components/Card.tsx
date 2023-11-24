@@ -1,5 +1,5 @@
-import { IProduct } from '../interfaces';
 import Counter from './Counter';
+import { IProduct } from '../utils/definitions';
 import '../styles/Card.scss';
 
 function Card({ product }: { product: IProduct }) {

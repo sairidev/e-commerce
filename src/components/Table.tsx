@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { IShop } from '../interfaces';
 import { ShopContext } from '../context/Shop';
 import '../styles/Table.scss';
+import { IProduct } from '../utils/definitions';
 
 function Table({ total }: { total?: number }) {
   const path = useLocation().pathname;
@@ -22,7 +22,7 @@ function Table({ total }: { total?: number }) {
         </tr>
       </thead>
       <tbody>
-        {state.map((order: IShop) => (
+        {state.map((order: IProduct) => (
           <TableRow key={`${order.id}_${order.name}`} product={order} />
         ))}
       </tbody>
@@ -43,7 +43,7 @@ export default Table;
 function TableRow({
   product,
 }: {
-  product: Pick<IShop, 'name' | 'amount' | 'total'>;
+  product: Pick<IProduct, 'name' | 'amount' | 'total'>;
 }) {
   return (
     <tr>

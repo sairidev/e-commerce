@@ -1,13 +1,13 @@
-import { IShop, IShopAction } from '../interfaces';
+import { IProduct } from './definitions';
 
-export function productFilter(data: IShop, shop: IShop[]) {
+export function productFilter(data: IProduct, shop: IProduct[]) {
   const { id, amount } = data;
-  const product = shop.filter((product) => product.id == id)[0];
+  const product = shop.filter((product: IProduct) => product.id == id)[0];
 
-  return { ...product, amount, total: product.price * amount };
+  return { ...product, amount, total: product.price * (amount || 0) };
 }
 
-export function productChanges(state: IShop[], action: IShopAction) {
+export function productChanges(state: IProduct[], action: any) {
   return state.map((product) =>
     product.id === action.payload.id ? action.payload : product
   );

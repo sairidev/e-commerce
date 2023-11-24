@@ -1,15 +1,26 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { ProductsContext } from './Products';
-import { IShop, IShopAction } from '../interfaces';
 import { productChanges, productFilter } from '../utils';
+import { IProduct } from '../utils/definitions';
 
-export const ShopContext = createContext<IShop[]>([]);
+export const ShopContext = createContext<{
+  state: any;
+  add: any;
+  rest: any;
+  clear: any;
+}>({
+  state: {},
+  add: () => {},
+  rest: () => {},
+  clear: () => {},
+});
 
-const reducer = (state: IShop[], action: IShopAction) => {
+const reducer = (state: IProduct[], action: any) => {
   switch (action.type) {
     case 'add': {
       if (
-        state.filter((product) => product.id === action.payload.id).length === 0
+        state.filter((product: IProduct) => product.id === action.payload.id)
+          .length === 0
       ) {
         return [...state, action.payload];
       }
@@ -19,7 +30,9 @@ const reducer = (state: IShop[], action: IShopAction) => {
 
     case 'rest': {
       if (action.payload.amount === 0) {
-        return state.filter((product) => product.id !== action.payload.id);
+        return state.filter(
+          (product: IProduct) => product.id !== action.payload.id
+        );
       }
 
       return productChanges(state, action);
@@ -37,14 +50,14 @@ function Shop({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, []);
   const shop = useContext(ProductsContext);
 
-  const add = (data: IShop) => {
+  const add = (data: IProduct) => {
     dispatch({
       type: 'add',
       payload: productFilter(data, shop),
     });
   };
 
-  const rest = (data: IShop) => {
+  const rest = (data: IProduct) => {
     dispatch({
       type: 'rest',
       payload: productFilter(data, shop),

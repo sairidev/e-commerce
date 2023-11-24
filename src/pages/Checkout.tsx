@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from 'react';
 import { ShopContext } from '../context/Shop';
-import { IShop } from '../interfaces';
+
 import Table from '../components/Table';
 import '../styles/Checkout.scss';
+import { IProduct } from '../utils/definitions';
 
 function Checkout() {
   const { state, clear } = useContext(ShopContext);
@@ -16,7 +17,7 @@ function Checkout() {
 
   useEffect(() => {
     if (state.length > 0) {
-      const values = state.map((product: IShop) => product.total);
+      const values = state.map((product: IProduct) => product.total);
       setTotal(values.reduce((val: number, total: number) => (total += val)));
     }
   }, [total]);

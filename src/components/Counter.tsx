@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
 import { ShopContext } from '../context/Shop';
-import { IShop } from '../interfaces';
+import { IProduct } from '../utils/definitions';
 import '../styles/Counter.scss';
 
 function Counter({ productID }: { productID: number }) {
   const [counter, setCounter] = useState(0);
-  const { state, add, rest }: any = useContext(ShopContext);
+  const { state, add, rest } = useContext(ShopContext);
 
   const click = (e: any) => {
     const type = e.target.classList.value.split('').reverse()[0];
@@ -28,7 +28,7 @@ function Counter({ productID }: { productID: number }) {
   };
 
   useEffect(() => {
-    const product = state.filter((product: IShop) =>
+    const product = state.filter((product: IProduct) =>
       product.id == productID ? product.amount : 0
     )[0];
 

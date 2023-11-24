@@ -1,6 +1,6 @@
 import { useContext } from 'react';
+import { IProduct } from './utils/definitions';
 import { ProductsContext } from './context/Products';
-import { IProduct } from './interfaces';
 import Card from './components/Card';
 import './App.css';
 
